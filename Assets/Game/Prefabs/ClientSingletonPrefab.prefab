@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &339942177332703787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5984951266900439762}
+  - component: {fileID: 877498881152904401}
+  - component: {fileID: 7551139588174544859}
+  m_Layer: 0
+  m_Name: ClientSingletonPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5984951266900439762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339942177332703787}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &877498881152904401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339942177332703787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8b6c72d8b61f478b3b8c3a8551172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdAreaMargin: 0.5
+  holdAreaAngle: 60
+  velocityScale: 2
+  minVelocity: 6
+  holdObjectPrefab: {fileID: 2030592019723691507, guid: efe66b148c70e4a42b0fd5e7c5a5a4ba, type: 3}
+--- !u!114 &7551139588174544859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339942177332703787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a2f8e514e1aa743aaa5750ab59d9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accelSensitivity: 20
+  velocityResilience: 2
+  positionResilience: 1
+  positionScale: {x: 10, y: 2, z: 2}
+  positionBounds: {x: 5, y: 1, z: 1}

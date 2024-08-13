@@ -1,0 +1,54 @@
+{
+    "name": "ARPoseInputAction",
+    "maps": [
+        {
+            "name": "Default",
+            "id": "34728299-5f8e-436a-a0d6-e5111c39e79d",
+            "actions": [
+                {
+                    "name": "Attitude",
+                    "type": "Value",
+                    "id": "6f538593-8028-4b69-b03b-5a2ed80149c9",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Accel",
+                    "type": "Value",
+                    "id": "326b173c-274f-4cb5-a457-62111bbe6da5",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6814c9f1-e074-47bd-bb86-f1b61cb04afb",
+                    "path": "<AttitudeSensor>/attitude",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attitude",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8692a67f-9546-4f5c-a3f7-83540896b6c3",
+                    "path": "<LinearAccelerationSensor>/acceleration",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
