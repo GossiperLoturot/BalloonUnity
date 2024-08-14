@@ -78,4 +78,10 @@ public class Projectile : NetworkBehaviour
             }
         }
     }
+
+    // Destroy when contact to collider
+    void OnCollisionEnter()
+    {
+        if (Runner.IsServer) Runner.Despawn(Object);
+    }
 }

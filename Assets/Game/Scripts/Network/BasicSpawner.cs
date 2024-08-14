@@ -35,26 +35,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     void Awake()
     {
         _spawnOriginQueue = new(_spawnOriginPool);
-    }
 
-    void OnGUI()
-    {
-        if (_runner == null)
-        {
-            if (GUI.Button(new Rect(0, 0, 200, 40), "Host"))
-            {
-                StartGame(GameMode.Host);
-            }
-
-            if (GUI.Button(new Rect(0, 40, 200, 40), "Join"))
-            {
-                StartGame(GameMode.Client);
-            }
-        }
-    }
-
-    async void StartGame(GameMode mode)
-    {
         _runner = gameObject.AddComponent<NetworkRunner>();
         _runner.ProvideInput = true;
 
@@ -64,10 +45,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         var sceneInfo = new NetworkSceneInfo();
         if (scene.IsValid) sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
 
-        await _runner.StartGame(new StartGameArgs()
+        _runner.StartGame(new StartGameArgs()
         {
-            GameMode = mode,
-            SessionName = "TestRoom",
+            GameMode = GameMode.AutoHostOrClient,
             Scene = scene,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
@@ -157,10 +137,15 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
         _clientSingleton = Instantiate(_clientSingletonPrefab);
 
+        var preload = PreloadSnapshot.latest;
+        var correctionPosition = -preload.initialPosition;
+        var dir = preload.initialRotation * Vector3.forward;
+        var correctionRotation = Quaternion.Inverse(Quaternion.LookRotation(Vector3.Scale(dir, new Vector3(1, 0, 1))));
+
         var arPose = _clientSingleton.GetComponent<ARPose>();
         arPose.onChanged += (position, rotation) => {
-            _position = position;
-            _rotation = rotation;
+            _position = position + correctionPosition;
+            _rotation = correctionRotation * rotation;
         };
         
         var swipeThrow = _clientSingleton.GetComponent<SwipeThrow>();
@@ -177,17 +162,28 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {
+        var main = new MainSnapshot()
+        {
+            state = Leaderboard.current.GetState(),
+            maxRunningTime = Leaderboard.current.maxRunningTime,
+            runningTime = Leaderboard.current.GetRunningTime(),
+            selfScore = Leaderboard.current.GetScore(runner.LocalPlayer),
+            otherScore = Leaderboard.current.GetOtherScore(runner.LocalPlayer),
+        };
+        MainSnapshot.latest = main;
+
         Destroy(_clientSingleton);
 
-        var o = new GameObject("Leaderboard Snapshot");
-
-        var snapshot = o.AddComponent<LeaderboardSnapshot>();
-        snapshot.state = Leaderboard.current.GetState();
-        snapshot.maxRunningTime = Leaderboard.current.maxRunningTime;
-        snapshot.runningTime = Leaderboard.current.GetRunningTime();
-        snapshot.selfScore = Leaderboard.current.GetScore(runner.LocalPlayer);
-        snapshot.otherScore = Leaderboard.current.GetOtherScore(runner.LocalPlayer);
+        SceneManager.LoadScene("Game/Scenes/Post", LoadSceneMode.Single);
     }
 
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+
+    void OnGUI()
+    {
+        if (_runner == null) return;
+
+        var isRunning = _runner.IsRunning;
+        GUI.TextField(new Rect(0, Screen.height - 100, 200, 100), $"IsRunning: {isRunning}");
+    }
 }

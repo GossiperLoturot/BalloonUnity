@@ -25,7 +25,6 @@ public class ARPose : MonoBehaviour
     ARPoseInputAction _inputAction;
     Vector3 _position;
     Quaternion _rotation;
-    Quaternion _initRotation;
 
     void Awake()
     {
@@ -59,20 +58,7 @@ public class ARPose : MonoBehaviour
     {
         var readValue = cx.ReadValue<Quaternion>();
 
-        if (readValue == new Quaternion()) return;
-
         _rotation = AttitudeDeviceToCamera(readValue);
-
-        // Y軸回転補正
-
-        if (_initRotation == new Quaternion())
-        {
-            _initRotation = _rotation;
-        }
-
-        var dir = Vector3.Scale(_initRotation * Vector3.forward, new Vector3(1, 0, 1));
-        var collection = Quaternion.Inverse(Quaternion.LookRotation(dir));
-        _rotation = collection * _rotation;
     }
 
     /// <summary>

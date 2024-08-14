@@ -64,4 +64,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxReadyTime: 3
-  maxRunningTime: 60
+  maxRunningTime: 30
