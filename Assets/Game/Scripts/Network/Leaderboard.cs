@@ -122,7 +122,7 @@ public class Leaderboard : NetworkBehaviour
 
     // ゲーム開始待機時間
 
-    public float GetTime() => readyTime; 
+    public float GetReadyTime() => readyTime; 
 
     void OnChangeReadyTime(NetworkBehaviourBuffer _) => onReadyTimeChanged?.Invoke(); 
 
@@ -144,7 +144,7 @@ public class Leaderboard : NetworkBehaviour
         {
             if (k != player.PlayerId) return v;
         }
-        throw new UnityException("not found other score");
+        return 0;
     }
 
     void OnChangeScores(NetworkBehaviourBuffer _) => onScoreChanged?.Invoke(); 

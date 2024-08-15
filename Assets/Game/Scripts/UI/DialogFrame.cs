@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class WinFrame : MonoBehaviour
+[DefaultExecutionOrder(-100)]
+public class DialogFrame : MonoBehaviour
 {
     [SerializeField]
-    float _cooldownTime = 2;
+    float _cooldownTime = 1;
 
     [SerializeField]
     Canvas _canvas;
@@ -17,7 +18,7 @@ public class WinFrame : MonoBehaviour
 
     Coroutine _coroutine;
 
-    void Start()
+    void Awake()
     {
         _canvas.enabled = false;
     }

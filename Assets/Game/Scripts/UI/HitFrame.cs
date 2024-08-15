@@ -1,10 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
-public class LoseFrame : MonoBehaviour
+[DefaultExecutionOrder(-100)]
+public class HitFrame : MonoBehaviour
 {
     [SerializeField]
-    float _cooldownTime = 1;
+    float _cooldownTime = 2;
+
+    [SerializeField]
+    ParticleSystem[] _particles;
 
     [SerializeField]
     Canvas _canvas;
@@ -17,7 +21,7 @@ public class LoseFrame : MonoBehaviour
 
     Coroutine _coroutine;
 
-    void Start()
+    void Awake()
     {
         _canvas.enabled = false;
     }
@@ -34,8 +38,9 @@ public class LoseFrame : MonoBehaviour
         _canvas.enabled = true;
         _animator.Play(_animationName, 0, 0);
 
+        foreach (var particle in _particles) particle.Play();
+
         yield return new WaitForSeconds(_cooldownTime);
-        
         _canvas.enabled = false;
     }
 }

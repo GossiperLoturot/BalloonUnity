@@ -3,6 +3,44 @@ using UnityEngine.SceneManagement;
 
 public class Post : MonoBehaviour
 {
+    [SerializeField]
+    DialogFrame _winFrame;
+
+    [SerializeField]
+    DialogFrame _drawFrame;
+
+    [SerializeField]
+    DialogFrame _loseFrame;
+
+    [SerializeField]
+    ResultFrame _resultFrame;
+
+    void Awake()
+    {
+        var main = MainSnapshot.latest;
+
+        if (main == null) throw new UnityException("latest main snapshot is not found");
+
+        if (main.selfScore > main.otherScore)
+        {
+            _winFrame.ShowFrame();
+        }
+        else if (main.otherScore > main.selfScore)
+        {
+            _loseFrame.ShowFrame();
+        }
+        else
+        {
+            _drawFrame.ShowFrame();
+        }
+        _resultFrame.ShowFrame(main.selfScore, main.otherScore);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Game/Scenes/Main", LoadSceneMode.Single);
+    }
+
     // デバッグ
     void OnGUI()
     {

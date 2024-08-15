@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22294041067383804}
   - component: {fileID: 4564448160750957225}
+  - component: {fileID: 8199877963422445624}
   m_Layer: 5
   m_Name: TitleView
   m_TagString: Untagged
@@ -63,6 +64,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &8199877963422445624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2295247731422114923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &8589046347967750331
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,10 +146,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B9\u30FC\u30D1\u30FC\u6C34\u98A8\u8239\n\u30D0\u30C8\u30EB"
+  m_text: "\u6C34\u98A8\u8239\u30D0\u30C8\u30EB\n\u30AA\u30F3\u30E9\u30A4\u30F3"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 40fd2d5e816f1044fa97d65385486f8b, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1a45b97640f84c14f895814e6a094b55, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -313,16 +331,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 439789316732749097, guid: ef7a8998c93ccff41b35aeea97696412, type: 3}
       propertyPath: m_text
-      value: "\u30C6\u30B9\u30C8"
+      value: "\u3042\u306A\u305F"
       objectReference: {fileID: 0}
-    - target: {fileID: 439789316732749097, guid: ef7a8998c93ccff41b35aeea97696412, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 439789316732749097, guid: ef7a8998c93ccff41b35aeea97696412, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3290253506602677781, guid: ef7a8998c93ccff41b35aeea97696412, type: 3}
       propertyPath: m_Name
       value: Avater Button

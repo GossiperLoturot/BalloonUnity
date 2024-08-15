@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 
-public class MatchingWaitFrame : MonoBehaviour
+[DefaultExecutionOrder(-100)]
+public class WaittingFrame : MonoBehaviour
 {
     [SerializeField]
     Canvas _canvas;
+
+    void Awake()
+    {
+        _canvas.enabled = false;
+    }
 
     public void ShowFrame()
     {
@@ -14,5 +20,4 @@ public class MatchingWaitFrame : MonoBehaviour
     {
         _canvas.enabled = false;
     }
-
 }

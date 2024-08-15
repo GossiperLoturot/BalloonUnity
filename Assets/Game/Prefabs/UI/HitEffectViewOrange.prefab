@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1244207079193590314, guid: 23f94b13b91ab174daeb165d54d44e29, type: 3}
+      propertyPath: m_text
+      value: "\u3042\u3044\u3066"
+      objectReference: {fileID: 0}
     - target: {fileID: 1556684106782116352, guid: 23f94b13b91ab174daeb165d54d44e29, type: 3}
       propertyPath: m_Color.b
       value: 0.6862745
@@ -131,7 +135,7 @@ PrefabInstance:
     - target: {fileID: 6065504746202212770, guid: 23f94b13b91ab174daeb165d54d44e29, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: 2100000, guid: f9e66bd41e73d164ca6dacd0cac24a06, type: 2}
     - target: {fileID: 6234338356917742572, guid: 23f94b13b91ab174daeb165d54d44e29, type: 3}
       propertyPath: m_Color.b
       value: 0.6862745

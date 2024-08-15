@@ -67,7 +67,7 @@ public class ARPose : MonoBehaviour
     /// </summary>
     Quaternion AttitudeDeviceToCamera(Quaternion rotation)
     {
-        #if UNITY_WEBGL
+        #if UNITY_WEBGL && !UNITY_EDITOR
         return GetMobileType() switch {
             // Android
             1 => Quaternion.Euler(90, 0, 0) * new Quaternion(-rotation.x, -rotation.y, rotation.z, rotation.w),

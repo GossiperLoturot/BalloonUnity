@@ -142,8 +142,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Win
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 40fd2d5e816f1044fa97d65385486f8b, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1a45b97640f84c14f895814e6a094b55, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 3805939509865723714}
   - component: {fileID: 4410672898431319818}
   - component: {fileID: 5478466338613711742}
-  - component: {fileID: 3649442876308179831}
+  - component: {fileID: 4056785914760649020}
   m_Layer: 5
   m_Name: WinEffectView
   m_TagString: Untagged
@@ -293,7 +293,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3649442876308179831
+--- !u!114 &4056785914760649020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8834281427306533978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a41c9b7f6103d345b3ba428b725ef30, type: 3}
+  m_Script: {fileID: 11500000, guid: 0270c4484e3343147ae5cf57819f1822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldownTime: 2

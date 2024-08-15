@@ -2,8 +2,12 @@ using UnityEngine;
 using TMPro;
 using System;
 
+[DefaultExecutionOrder(-100)]
 public class HUDFrame : MonoBehaviour
 {
+    [SerializeField]
+    Canvas _canvas;
+
     [SerializeField]
     TextMeshProUGUI _selfScore;
 
@@ -13,6 +17,20 @@ public class HUDFrame : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI _remainTime;
 
+    void Awake()
+    {
+        _canvas.enabled = false;
+    }
+
+    public void ShowFrame()
+    {
+        _canvas.enabled = true;
+    }
+
+    public void HideFrame()
+    {
+        _canvas.enabled = false;
+    }
 
     public void SetSelfScore(int score)
     {

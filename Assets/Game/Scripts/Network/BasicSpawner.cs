@@ -9,6 +9,24 @@ using UnityEngine;
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField]
+    WaittingFrame _networkWaittingFrame;
+
+    [SerializeField]
+    WaittingFrame _matchWaittingFrame;
+
+    [SerializeField]
+    ReadyFrame _readyFrame;
+
+    [SerializeField]
+    HUDFrame _hudFrame;
+
+    [SerializeField]
+    HitFrame _cyanHitFrame;
+
+    [SerializeField]
+    HitFrame _orangeHitFrame;
+
+    [SerializeField]
     List<Transform> _spawnOriginPool;
 
     [SerializeField]
@@ -26,6 +44,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     Queue<Transform> _spawnOriginQueue;
     GameObject _clientSingleton;
 
+    bool _isRegistered;
+    int _prevSelfScore;
+    int _prevOtherScore;
+
     Vector3 _position;
     Quaternion _rotation;
     bool _releaseButton;
@@ -34,6 +56,11 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     void Awake()
     {
+        _networkWaittingFrame.ShowFrame();
+        _matchWaittingFrame.HideFrame();
+        _readyFrame.HideFrame();
+        _hudFrame.HideFrame();
+
         _spawnOriginQueue = new(_spawnOriginPool);
 
         _runner = gameObject.AddComponent<NetworkRunner>();
@@ -51,6 +78,85 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             Scene = scene,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
+    }
+
+    void Update()
+    {
+        if (Leaderboard.current == null) return;
+
+        // 初回のNetworkGameState適用
+        if (Leaderboard.current.GetState() == NetworkGameState.Waiting)
+        {
+            _networkWaittingFrame.HideFrame();
+            _matchWaittingFrame.ShowFrame();
+            _readyFrame.HideFrame();
+            _hudFrame.HideFrame();
+        }
+        if (Leaderboard.current.GetState() == NetworkGameState.Ready)
+        {
+            _networkWaittingFrame.HideFrame();
+            _matchWaittingFrame.HideFrame();
+            _readyFrame.ShowFrame();
+            _hudFrame.HideFrame();
+        }
+        else if (Leaderboard.current.GetState() == NetworkGameState.Running)
+        {
+            _networkWaittingFrame.HideFrame();
+            _matchWaittingFrame.HideFrame();
+            _readyFrame.HideFrame();
+            _hudFrame.ShowFrame();
+        }
+
+        // コールバックを登録
+        if (_isRegistered) return;
+        Leaderboard.current.onStateChanged += () => {
+            if (Leaderboard.current.GetState() == NetworkGameState.Ready)
+            {
+                _networkWaittingFrame.HideFrame();
+                _matchWaittingFrame.HideFrame();
+                _readyFrame.ShowFrame();
+                _hudFrame.HideFrame();
+            }
+            else if (Leaderboard.current.GetState() == NetworkGameState.Running)
+            {
+                _networkWaittingFrame.HideFrame();
+                _matchWaittingFrame.HideFrame();
+                _readyFrame.HideFrame();
+                _hudFrame.ShowFrame();
+            }
+        };
+        Leaderboard.current.onReadyTimeChanged += () => {
+            _readyFrame.SetRemainTime(Leaderboard.current.maxReadyTime - Leaderboard.current.GetReadyTime());
+        };
+        Leaderboard.current.onRunningTimeChanged += () => {
+            _hudFrame.SetRemainTime(Leaderboard.current.maxRunningTime - Leaderboard.current.GetRunningTime());
+        };
+        Leaderboard.current.onScoreChanged += () => {
+            var selfScore = Leaderboard.current.GetScore(_runner.LocalPlayer);
+            _hudFrame.SetSelfScore(selfScore);
+            if (selfScore != _prevSelfScore)
+            {
+                _cyanHitFrame.ShowFrame();
+                _prevSelfScore = selfScore;
+            }
+
+            var otherScore = Leaderboard.current.GetOtherScore(_runner.LocalPlayer);
+            _hudFrame.SetOtherScore(otherScore);
+            if (otherScore != _prevOtherScore)
+            {
+                _orangeHitFrame.ShowFrame();
+                _prevOtherScore = otherScore;
+            }
+        };
+        _isRegistered = true;
+    }
+
+    void OnGUI()
+    {
+        if (_runner == null) return;
+
+        var isRunning = _runner.IsRunning;
+        GUI.TextField(new Rect(0, Screen.height - 100, 200, 100), $"IsRunning: {isRunning}");
     }
  
     public void OnConnectedToServer(NetworkRunner runner) { }
@@ -178,12 +284,4 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
-
-    void OnGUI()
-    {
-        if (_runner == null) return;
-
-        var isRunning = _runner.IsRunning;
-        GUI.TextField(new Rect(0, Screen.height - 100, 200, 100), $"IsRunning: {isRunning}");
-    }
 }
