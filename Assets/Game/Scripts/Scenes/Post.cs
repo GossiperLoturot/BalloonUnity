@@ -42,6 +42,7 @@ public class Post : MonoBehaviour
     }
 
     // デバッグ
+    #if UNITY_EDITOR
     void OnGUI()
     {
         if (GUI.Button(new Rect(0, 200, 200, 40), "Start"))
@@ -67,4 +68,5 @@ public class Post : MonoBehaviour
 
         GUI.TextArea(new Rect(0, 0, 400, 200), $"state: {stateStr}\nrunning: {runningTimeStr}\nself score: {main.selfScore}\nother score: {main.otherScore}");
     }
+    #endif
 }

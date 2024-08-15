@@ -150,6 +150,7 @@ public class Leaderboard : NetworkBehaviour
     void OnChangeScores(NetworkBehaviourBuffer _) => onScoreChanged?.Invoke(); 
 
     // デバッグ
+    #if UNITY_EDITOR
     void OnGUI()
     {
         // Network Objectのスポーン待機
@@ -174,4 +175,5 @@ public class Leaderboard : NetworkBehaviour
 
         GUI.TextArea(new Rect(200, 0, 400, 200), $"state: {stateStr}\nready: {readyTimeStr}\nrunning: {runningTimeStr}\nscore: {scoresStr}");
     }
+    #endif
 }

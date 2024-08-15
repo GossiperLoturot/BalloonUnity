@@ -42,6 +42,12 @@ public class Preload : MonoBehaviour
         PreloadSnapshot.latest = latest;
     }
 
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Game/Scenes/Main", LoadSceneMode.Single);
+    }
+
+    #if UNITY_EDITOR
     void OnGUI()
     {
         if (GUI.Button(new Rect(0, 0, 200, 40), "Start"))
@@ -49,9 +55,5 @@ public class Preload : MonoBehaviour
             SceneManager.LoadScene("Game/Scenes/Main", LoadSceneMode.Single);
         }
     }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene("Game/Scenes/Main", LoadSceneMode.Single);
-    }
+    #endif
 }

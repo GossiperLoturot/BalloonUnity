@@ -151,6 +151,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         _isRegistered = true;
     }
 
+    #if UNITY_EDITOR
     void OnGUI()
     {
         if (_runner == null) return;
@@ -158,6 +159,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         var isRunning = _runner.IsRunning;
         GUI.TextField(new Rect(0, Screen.height - 100, 200, 100), $"IsRunning: {isRunning}");
     }
+    #endif
  
     public void OnConnectedToServer(NetworkRunner runner) { }
 
